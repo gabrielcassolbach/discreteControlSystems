@@ -1,4 +1,4 @@
-function [motorController, dados] = moveMotor(motorController, posicaoAlvo, velocidadeMax)
+function [motorController, dados] = moverParaPosicao(motorController, posicaoAlvo, velocidadeMax)
     % moverParaPosicao - Move o motor para uma posição específica e retorna as curvas
     % Entrada:
     %   motorController: estrutura do controlador
@@ -7,7 +7,7 @@ function [motorController, dados] = moveMotor(motorController, posicaoAlvo, velo
     % Saída:
     %   motorController: estrutura atualizada
     %   dados: estrutura contendo tempo, posição, velocidade, erro e saída PID
-me 
+
     if nargin < 3
         velocidadeMax = 60; % RPM padrão
     end
@@ -35,6 +35,7 @@ me
 
     % Taxa de controle: 50ms
     taxaControle = 0.05; % segundos
+    proximoTempo = taxaControle;
 
     fprintf('Movendo para %.1f graus com velocidade máxima de %d RPM...\n', posicaoAlvo, velocidadeMax);
     tic;
@@ -64,7 +65,7 @@ me
         motorController.somaErro = motorController.somaErro + erro;
         derivada = erro - motorController.erroAnterior;
 
-        saidaPID = 1 * erro + ...
+        saidaPID = motorController.Kp * erro + ...
                    motorController.Ki * motorController.somaErro + ...
                    motorController.Kd * derivada;
 

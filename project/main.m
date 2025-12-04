@@ -1,12 +1,23 @@
-microcontroller = arduino("COM7", "ESP32-WROOM-DevKitV1");
+clear
 
 addpath('./motor');
 addpath('./sensor');
 
-motor = setupMotor(microcontroller);
-[motor, dados] = moveMotor(motor, 90, 60); % arduino, angulo, velmax
+motor = setupMotorDC();
+[motor, dados] = moverParaPosicao(motor, -10, 60); % arduino, angulo, velmax
 
-num_amostras = 10; % TO-DO
-taxa = 50; % TO-DO
+num_amostras = 1; % TO-DO
+taxa = 0.1; % TO-DO
 
-[tempo, luz] = readSensor(microcontroller,num_amostras,taxa);
+[tempo, luz] = readSensor(motor.arduino, num_amostras,taxa);
+
+% while(1):
+%     [tempo, luz] = readSensor(motor.arduino, num_amostras,taxa);
+% 
+%     erro = 0.8 - luz(0);
+% 
+%     delta_theta = p*erro;
+% 
+%     theta_atual = 
+
+plot(dados.erro);
