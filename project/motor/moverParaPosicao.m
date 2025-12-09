@@ -29,10 +29,8 @@ function [motorController, dados] = moverParaPosicao(motorController, posicaoAlv
 
     % Tempo de execução máximo (segundos)
     tempoMax = 3;
-   % tempoInicio = tic;
+    tempoInicio = tic;
     
-   
-
     % Taxa de controle: 50ms
     taxaControle = 0.05; % segundos
     proximoTempo = taxaControle;
@@ -61,9 +59,11 @@ function [motorController, dados] = moverParaPosicao(motorController, posicaoAlv
             erro = erro + 360;
         end
 
-        % Controlador PID
-        motorController.somaErro = motorController.somaErro + erro;
-        derivada = erro - motorController.erroAnterior;
+        fprintf('O valor do erro é %.2f\n', erro);
+
+        motorController.somaErro = motorController.somaErro + erro*taxaControle;
+        
+        derivada = (erro - motorController.erroAnterior)/taxaControle;
 
         saidaPID = motorController.Kp * erro + ...
                    motorController.Ki * motorController.somaErro + ...
@@ -81,37 +81,39 @@ function [motorController, dados] = moverParaPosicao(motorController, posicaoAlv
         motorController.erroHistorico = [motorController.erroHistorico; erro];
         motorController.saidaPIDHistorico = [motorController.saidaPIDHistorico; saidaPID];
 
+         
         % Aplicar controle ao motor
-      %  if abs(erro) <= tolerancia
+        if abs(erro) <= 1.0
             % Posição atingida
-       %     pararMotor(motorController);
-        %    fprintf('Posição atingida: %.1f graus\n', motorController.posicaoAtual);
+            pararMotor(motorController);
+            fprintf('Posição atingida: %.1f graus\n', motorController.posicaoAtual);
 
             % Armazenar último ponto
-          %  motorController.tempoHistorico = [motorController.tempoHistorico; toc(tempoInicio)];
-            %motorController.posicaoHistorico = [motorController.posicaoHistorico; motorController.posicaoAtual];
-            %motorController.velocidadeHistorico = [motorController.velocidadeHistorico; 0];
-           % motorController.erroHistorico = [motorController.erroHistorico; 0];
-          %  motorController.saidaPIDHistorico = [motorController.saidaPIDHistorico; 0];
-         %   break;
-        %else
-            % Controlar velocidade e direção
+            motorController.tempoHistorico = [motorController.tempoHistorico; toc(tempoInicio)];
+            motorController.posicaoHistorico = [motorController.posicaoHistorico; motorController.posicaoAtual];
+            motorController.velocidadeHistorico = [motorController.velocidadeHistorico; 0];
+            motorController.erroHistorico = [motorController.erroHistorico; 0];
+            motorController.saidaPIDHistorico = [motorController.saidaPIDHistorico; 0];
+            break;
+        else
             controlarMotor(motorController, saidaPID);
-       % end
+        end
 
-        % Aguardar até o próximo ciclo de controle 
-       while toc <taxaControle*i;
-            pause(0.001); % Sleep de 1ms para não sobrecarregar CPU
+        controlarMotor(motorController, saidaPID);
+        
+        while toc <taxaControle*i;
+            pause(0.001); 
         end
      
-    % Criar estrutura de dados de saída
-    dados = struct();
-    dados.tempo = motorController.tempoHistorico;
-    dados.posicao = motorController.posicaoHistorico;
-    dados.velocidade = motorController.velocidadeHistorico;
-    dados.erro = motorController.erroHistorico;
-    dados.saidaPID = motorController.saidaPIDHistorico;
-    dados.posicaoAlvo = motorController.posicaoAlvo;
-    dados.velocidadeMax = motorController.velocidadeAlvo;
+        % Criar estrutura de dados de saída
+        dados = struct();
+        dados.tempo = motorController.tempoHistorico;
+        dados.posicao = motorController.posicaoHistorico;
+        dados.velocidade = motorController.velocidadeHistorico;
+        dados.erro = motorController.erroHistorico;
+        dados.saidaPID = motorController.saidaPIDHistorico;
+        dados.posicaoAlvo = motorController.posicaoAlvo;
+        dados.velocidadeMax = motorController.velocidadeAlvo;
     end
-       pararMotor(motorController);
+      pararMotor(motorController);
+

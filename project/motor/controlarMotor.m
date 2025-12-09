@@ -7,8 +7,17 @@ function controlarMotor(motorController, velocidade)
     a = motorController.arduino;
 
     % Converter RPM para voltagem PWM (0-12V)
- 
+    PWM_MIN = 1.0;
+
     pwmValue = abs(velocidade/60) * 3.0; % Voltagem (0-5V)
+
+    if pwmValue > 0
+        pwmValue = max(pwmValue, PWM_MIN);
+    end
+    
+
+    fprintf("pwmValue: %d\n",pwmValue);
+
 
     if velocidade > 0
         % Sentido horário

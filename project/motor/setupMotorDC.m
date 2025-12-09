@@ -7,7 +7,8 @@ function motorController = setupMotorDC()
     % Pacote: MATLAB Support Package for Arduino Hardware
 
     % Criar objeto Arduino
-    a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
+    %a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
+    a = arduino("/dev/ttyUSB0","ESP32-WROOM-DevKitV1");
 
     % Definir pinos do Arduino
     % Motor A (JGA25-370)
@@ -37,8 +38,8 @@ function motorController = setupMotorDC()
     motorController.velocidadeAlvo = 0;      % RPM alvo
     motorController.posicaoAlvo = 0;         % Posição alvo em graus
     motorController.posicaoAtual = 0;        % Posição atual em graus
-    motorController.Kp = 1;                  % Ganho proporcional
-    motorController.Ki = 0;                % Ganho integral
+    motorController.Kp = 3;                  % Ganho proporcional
+    motorController.Ki = 0.3;                % Ganho integral
     motorController.Kd = 0;                  % Ganho derivativo
     motorController.erroAnterior = 0;
     motorController.somaErro = 0;

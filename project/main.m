@@ -4,7 +4,7 @@ addpath('./motor');
 addpath('./sensor');
 
 motor = setupMotorDC();
-[motor, dados] = moverParaPosicao(motor, -45, 30); % arduino, angulo, velmax
+[motor, dados] = moverParaPosicao(motor, -5, 30); % arduino, angulo, velmax
 
 num_amostras = 1; % TO-DO
 taxa = 0.1; % TO-DO
@@ -20,4 +20,7 @@ taxa = 0.1; % TO-DO
 % 
 %     theta_atual = 
 
-plot(dados.erro);
+plot(dados.tempo, dados.erro);
+xlabel('Tempo (s)');
+ylabel('Erro (graus)');
+grid on;
