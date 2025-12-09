@@ -4,12 +4,12 @@ addpath('./motor');
 addpath('./sensor');
 
 motor = setupMotorDC();
-[motor, dados] = moverParaPosicao(motor, -10, 60); % arduino, angulo, velmax
+[motor, dados] = moverParaPosicao(motor, -45, 30); % arduino, angulo, velmax
 
 num_amostras = 1; % TO-DO
 taxa = 0.1; % TO-DO
 
-[tempo, luz] = readSensor(motor.arduino, num_amostras,taxa);
+% [tempo, luz] = readSensor(motor.arduino, num_amostras,taxa);
 
 % while(1):
 %     [tempo, luz] = readSensor(motor.arduino, num_amostras,taxa);

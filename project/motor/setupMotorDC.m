@@ -11,8 +11,8 @@ function motorController = setupMotorDC()
 
     % Definir pinos do Arduino
     % Motor A (JGA25-370)
-    pinIN1 = 'D22';      % Controle de direção 1
-    pinIN2 = 'D23';      % Controle de direção 2
+    pinIN1 = 'D23';      % Controle de direção 1
+    pinIN2 = 'D22';      % Controle de direção 2
     %pinENA = 'D5';      % PWM para controle de velocidade (pino PWM)
 
     % Encoder - usar pinos de interrupção (D2 e D3 para Arduino UNO)
@@ -20,7 +20,7 @@ function motorController = setupMotorDC()
     pinEncoderB = 'D4'; % Interrupção externa 1
 
     % Parâmetros do motor e encoder
-    pulsosPerVolta = 55;        % PPV do encoder (ajustar conforme seu encoder)
+    pulsosPerVolta = 45;        % PPV do encoder (ajustar conforme seu encoder)
     reducao = 103;               % Redução da caixa de engrenagens
     pulsosEfetivos = pulsosPerVolta * reducao; % ~500 pulsos por volta do eixo
 
@@ -37,7 +37,7 @@ function motorController = setupMotorDC()
     motorController.velocidadeAlvo = 0;      % RPM alvo
     motorController.posicaoAlvo = 0;         % Posição alvo em graus
     motorController.posicaoAtual = 0;        % Posição atual em graus
-    motorController.Kp = 4.5;                  % Ganho proporcional
+    motorController.Kp = 1;                  % Ganho proporcional
     motorController.Ki = 0;                % Ganho integral
     motorController.Kd = 0;                  % Ganho derivativo
     motorController.erroAnterior = 0;
