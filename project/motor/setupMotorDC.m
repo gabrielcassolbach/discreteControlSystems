@@ -59,8 +59,8 @@ function motorController = setupMotorDC()
     writePWMVoltage(a, motorController.pinIN1, 0);
     writePWMVoltage(a, motorController.pinIN2, 0);
 
-    disp('Motor DC JGA25-370 configurado com sucesso!');
-    disp(['Pinos Motor: IN1=' motorController.pinIN1 ', IN2=' motorController.pinIN2 ]);
-    disp(['Encoder: A=' pinEncoderA ', B=' pinEncoderB]);
-    disp('Pacote: MATLAB Support Package for Arduino Hardware');
+    % disp('Motor DC JGA25-370 configurado com sucesso!');
+    % disp(['Pinos Motor: IN1=' motorController.pinIN1 ', IN2=' motorController.pinIN2 ]);
+    % disp(['Encoder: A=' pinEncoderA ', B=' pinEncoderB]);
+    % disp('Pacote: MATLAB Support Package for Arduino Hardware');
 end

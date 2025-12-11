@@ -59,7 +59,7 @@ function [motorController, dados] = moverParaPosicao(motorController, posicaoAlv
             erro = erro + 360;
         end
 
-        fprintf('O valor do erro é %.2f\n', erro);
+        %fprintf('O valor do erro é %.2f\n', erro);
 
         motorController.somaErro = motorController.somaErro + erro*taxaControle;
         
@@ -83,7 +83,7 @@ function [motorController, dados] = moverParaPosicao(motorController, posicaoAlv
 
          
         % Aplicar controle ao motor
-        if abs(erro) <= 1.0
+        if abs(erro) <= 1
             % Posição atingida
             pararMotor(motorController);
             fprintf('Posição atingida: %.1f graus\n', motorController.posicaoAtual);

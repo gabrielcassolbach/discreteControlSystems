@@ -16,7 +16,7 @@ function controlarMotor(motorController, velocidade)
     end
     
 
-    fprintf("pwmValue: %d\n",pwmValue);
+    %fprintf("pwmValue: %d\n",pwmValue);
 
 
     if velocidade > 0
