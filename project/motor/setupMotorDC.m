@@ -8,7 +8,7 @@ function motorController = setupMotorDC()
 
     % Criar objeto Arduino
     %a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
-    a = arduino("/dev/ttyUSB0","ESP32-WROOM-DevKitV1");
+    a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
 
     % Definir pinos do Arduino
     % Motor A (JGA25-370)
