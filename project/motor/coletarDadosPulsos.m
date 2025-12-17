@@ -90,13 +90,13 @@ function aplicarTensaoDireta(motorController, voltagem)
     end
 end
 
-function pararMotor(motorController)
-    % pararMotor - Para o motor imediatamente
-
-    a = motorController.arduino;
-    writePWMVoltage(a, motorController.pinIN1, 0);
-    writePWMVoltage(a, motorController.pinIN2, 0);
-end
+% function pararMotor(motorController)
+%     % pararMotor - Para o motor imediatamente
+% 
+%     a = motorController.arduino;
+%     writePWMVoltage(a, motorController.pinIN1, 0);
+%     writePWMVoltage(a, motorController.pinIN2, 0);
+% end
 
 % z = iddata(dadosColetados.pulsos, dadosColetados.u, dadosColetados.Ts);
 

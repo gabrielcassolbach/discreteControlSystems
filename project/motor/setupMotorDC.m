@@ -21,7 +21,7 @@ function motorController = setupMotorDC()
     pinEncoderB = 'D4'; % Interrupção externa 1
 
     % Parâmetros do motor e encoder
-    pulsosPerVolta = 45;        % PPV do encoder (ajustar conforme seu encoder)
+    pulsosPerVolta = 39;        % PPV do encoder (ajustar conforme seu encoder)
     reducao = 103;               % Redução da caixa de engrenagens
     pulsosEfetivos = pulsosPerVolta * reducao; % ~500 pulsos por volta do eixo
 
@@ -38,8 +38,11 @@ function motorController = setupMotorDC()
     motorController.velocidadeAlvo = 0;      % RPM alvo
     motorController.posicaoAlvo = 0;         % Posição alvo em graus
     motorController.posicaoAtual = 0;        % Posição atual em graus
-    motorController.Kp = 3;                  % Ganho proporcional
-    motorController.Ki = 0.3;                % Ganho integral
+    % motorController.Kp = 3;                  % Ganho proporcional
+    % motorController.Ki = 0.3;                % Ganho integral
+    % motorController.Kd = 0;                  % Ganho derivativo
+    motorController.Kp = 0.00354;                  % Ganho proporcional
+    motorController.Ki = 0.00642;                % Ganho integral
     motorController.Kd = 0;                  % Ganho derivativo
     motorController.erroAnterior = 0;
     motorController.somaErro = 0;
