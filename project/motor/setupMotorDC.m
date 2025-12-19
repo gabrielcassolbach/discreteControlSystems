@@ -1,4 +1,4 @@
-function motorController = setupMotorDC()
+function motorController = setupMotorDC(a)
     % setupMotorDC_JGA25 - Configura e retorna um objeto controlador para motor DC JGA25-370
     % Motor: JGA25-370 (12V, 60 RPM)
     % Driver: Módulo L298N
@@ -7,8 +7,7 @@ function motorController = setupMotorDC()
     % Pacote: MATLAB Support Package for Arduino Hardware
 
     % Criar objeto Arduino
-    %a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
-    a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
+    % a = arduino("/dev/cu.usbserial-A5069RR4","ESP32-WROOM-DevKitV1");
 
     % Definir pinos do Arduino
     % Motor A (JGA25-370)
